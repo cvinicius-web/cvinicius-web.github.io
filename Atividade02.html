@@ -2,64 +2,53 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>IMC Simples</title>
+    <title>Cálculo do IMC</title>
 
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             margin: 20px;
         }
 
-        h2 {
-            color: darkblue;
-            text-align: center;
-        }
-
         .caixa {
-            
+            border: 1px solid #999;
             padding: 15px;
-            width: 280px;
-            margin: auto;
+            width: 300px;
         }
 
         label {
-            display: block;
-            margin-top: 10px;
+            display: inline-block;
+            width: 50px;
+            margin-top: 5px;
         }
 
         input {
-            width: 100%;
-            margin-top: 3px;
-            padding: 5px;
-        }
-
-        button {
-            margin-top: 15px;
-            padding: 7px;
-            width: 100%;
+            width: 200px;
+            margin-top: 5px;
         }
 
         #resultado {
             margin-top: 15px;
-            border: 1px solid gray;
+            border: 1px solid #bbb;
             padding: 10px;
-            min-height: 40px;
+            height: 40px;
         }
     </style>
 </head>
+
 <body>
 
     <h2>Cálculo do IMC</h2>
 
     <div class="caixa">
         <label>Nome:</label>
-        <input type="text" id="nome">
+        <input type="text" id="nome"><br>
 
         <label>Peso:</label>
-        <input type="number" id="peso">
+        <input type="number" id="peso"><br>
 
         <label>Altura:</label>
-        <input type="number" step="0.01" id="altura">
+        <input type="number" step="0.01" id="altura"><br><br>
 
         <button onclick="calcularIMC()">Calcular IMC</button>
 
@@ -73,12 +62,12 @@
             let altura = Number(document.getElementById("altura").value);
 
             let imc = peso / (altura * altura);
-            let imcFinal = imc.toFixed(2);
+            imc = imc.toFixed(2);
 
             document.getElementById("resultado").innerHTML =
-                "Olá, " + nome + ".<br>Seu IMC é: " + imcFinal;
+                "Olá, " + nome + ". Seu IMC é " + imc;
         }
     </script>
 
 </body>
-</html>
+</html>    
