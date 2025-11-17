@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 01</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .caixa {
+            width: 650px;
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid #444;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            padding: 5px;
+            width: 200px;
+            margin-top: 3px;
+        }
+
+        .linha {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: #0b67e3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #004bb5;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="caixa">
+    <h2>Atividade 01</h2>
+
+    <div class="linha">
+        <div>
+            <label>Nome Completo:</label>
+            <input type="text" id="nomeCompleto">
+        </div>
+
+        <button onclick="separar()">>></button>
+
+        <div>
+            <label>Nome:</label>
+            <input type="text" id="nome">
+
+            <label>Sobrenome:</label>
+            <input type="text" id="sobrenome">
+        </div>
+    </div>
+</div>
+
+<script>
+    function separar() {
+        let nomeCompleto = document.getElementById("nomeCompleto").value.trim();
+
+        let partes = nomeCompleto.split(" ");
+
+        let primeiroNome = partes[0];
+        let ultimoSobrenome = partes[partes.length - 1];
+
+        document.getElementById("nome").value = primeiroNome;
+        document.getElementById("sobrenome").value = ultimoSobrenome;
+    }
+</script>
+
+</body>
+</html>
