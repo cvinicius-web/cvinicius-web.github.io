@@ -4,17 +4,74 @@
     <meta charset="UTF-8">
     <title>Atividade 06 - Gestão de Gastos Simples</title>
     <style>
-        /* CSS Simplificado */
-        body { font-family: sans-serif; display: flex; gap: 20px; padding: 20px; background-color: #f0f0f0; }
-        .secao { background-color: white; padding: 15px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
-        h2 { border-bottom: 2px solid #32CD32; padding-bottom: 5px; margin-bottom: 10px; }
-        input, select { margin: 5px 0; padding: 8px; border: 1px solid #ccc; width: 95%; box-sizing: border-box; }
-        button { padding: 8px 15px; margin-top: 10px; cursor: pointer; border: none; border-radius: 4px; }
-        #adicionar { background-color: #32CD32; color: white; }
-        #calcular { background-color: #1E90FF; color: white; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        #resumo-div { border-left: 5px solid #1E90FF; padding-left: 10px; }
+        /* CSS SIMPLIFICADO */
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            gap: 20px; 
+            padding: 20px; 
+            background-color: #f0f0f0; /* Cinza claro */
+        }
+        
+        .secao { 
+            background-color: white; 
+            padding: 15px; 
+            border-radius: 5px; 
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Sombra mais discreta */
+        }
+        
+        h2 { 
+            border-bottom: 1px solid #ccc; /* Borda simples e cinza */
+            padding-bottom: 5px; 
+            margin-bottom: 10px; 
+        }
+        
+        input, select { 
+            margin: 5px 0; 
+            padding: 8px; 
+            border: 1px solid #ccc; 
+            width: 95%; 
+            box-sizing: border-box; 
+        }
+        
+        button { 
+            padding: 8px 15px; 
+            margin-top: 10px; 
+            cursor: pointer; 
+            border: none; 
+            border-radius: 4px; 
+        }
+        
+        #adicionar { 
+            background-color: #32CD32; /* Verde */
+            color: white; 
+        }
+        
+        #calcular { 
+            background-color: #1E90FF; /* Azul */
+            color: white; 
+        }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 10px; 
+        }
+        
+        th, td { 
+            border: 1px solid #ddd; 
+            padding: 8px; 
+            text-align: left; 
+        }
+        
+        th {
+             background-color: #f7f7f7; /* Cabeçalho da tabela */
+        }
+        
+        #resumo-div { 
+            border-left: 3px solid #1E90FF; /* Borda vertical simples */
+            padding-left: 10px; 
+        }
     </style>
 </head>
 <body>
@@ -83,10 +140,8 @@
             return;
         }
 
-        // 1. Armazena o gasto
         extrato.push({ categoria, valor, data });
 
-        // 2. Adiciona a linha na tabela (Formatação de data simples)
         const newRow = extratoBody.insertRow();
         const dataFormatada = data.split('-').reverse().join('/'); // YYYY-MM-DD -> DD/MM/YYYY
         
@@ -94,7 +149,6 @@
         newRow.insertCell(1).textContent = dataFormatada;
         newRow.insertCell(2).textContent = formatarMoeda(valor);
 
-        // 3. Limpa e reseta
         valorInput.value = '';
         resumoConteudo.innerHTML = '<p>Clique em "Calcular" para ver o resumo.</p>';
     });
@@ -111,7 +165,6 @@
         let totalPorCategoria = {};
 
         extrato.forEach(item => {
-            // Consolida todos os totais em um único loop
             totalGeral += item.valor;
             
             const mes = item.data.substring(5, 7);
