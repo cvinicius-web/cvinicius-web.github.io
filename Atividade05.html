@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Atividade 05</title>
+<style>
+  body { font-family: Arial; padding: 20px; background:#f3f3f3; }
+  .caixa { background:white; padding:15px; border-radius:8px; width:260px; }
+  label { display:block; margin-top:10px; }
+  input { width:95%; padding:4px; margin-top:5px; }
+  button { margin-top:10px; padding:6px 10px; }
+  #msg { margin-top:10px; font-weight:bold; }
+</style>
+</head>
+<body>
+
+<h2>Formulário Simples</h2>
+
+<div class="caixa">
+  <label>Nome do Aluno</label>
+  <input id="aluno" type="text">
+
+  <label>Data de Nascimento</label>
+  <input id="nasc" type="date">
+
+  <label>Email</label>
+  <input id="email" type="text">
+
+  <label>DDD</label>
+  <input id="ddd" type="text" maxlength="3">
+
+  <label>Telefone</label>
+  <input id="tel" type="text">
+
+  <label>Atividades (máx 3)</label>
+  <input type="checkbox" class="atv"> Música<br>
+  <input type="checkbox" class="atv"> Futebol<br>
+  <input type="checkbox" class="atv"> Informática<br>
+  <input type="checkbox" class="atv"> Dança<br>
+
+  <button onclick="enviarForm()">Enviar</button>
+  <p id="msg"></p>
+</div>
+
+<script>
+function enviarForm() {
+  let aluno = document.getElementById('aluno').value;
+  let nasc  = document.getElementById('nasc').value;
+  let email = document.getElementById('email').value;
+  let ddd   = document.getElementById('ddd').value;
+  let tel   = document.getElementById('tel').value;
+  let atv   = document.querySelectorAll('.atv:checked');
+  let msg   = document.getElementById('msg');
+
+  if (!aluno || !nasc || !email || !ddd || !tel) {
+    msg.textContent = "Preencha todos os campos.";
+    return;
+  }
+
+  if (!email.includes('@')) {
+    msg.textContent = "Email inválido.";
+    return;
+  }
+
+  let ddds = ["11","21","31","41","51","61","71"];
+  if (!ddds.includes(ddd)) {
+    msg.textContent = "DDD inválido.";
+    return;
+  }
+
+  if (atv.length > 3) {
+    msg.textContent = "Máximo 3 atividades.";
+    return;
+  }
+
+  msg.textContent = "Cadastro enviado!";
+}
+</script>
+
+</body>
+</html>
