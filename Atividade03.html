@@ -43,27 +43,7 @@
 
         <button id="btnPrev"><<</button>
 
-        <!-- IMAGEM DO ROBOTRON -->
-        <!-- Cole o link da imagem dentro do src="" -->
-        <img id="robotron" 
-            src="robotron-amarelo.png" 
-             alt="Robotron">
-
-            <img id="robotron" 
-            src="robotron-azul.png" 
-             alt="Robotron">
-
-            <img id="robotron" 
-            src="robotron-branco.png" 
-             alt="Robotron">
-
-            <img id="robotron" 
-            src="robotron-rosa.png" 
-             alt="Robotron">
-
-            <img id="robotron" 
-            src="robotron-vermelho.png" 
-             alt="Robotron">
+        <img id="robotron" src="robotron-amarelo.png" alt="Robotron">
 
         <button id="btnNext">>></button>
 
@@ -81,23 +61,28 @@
 
         let indice = 0;
 
+        // Note que o .getElementById("robotron") agora encontra a única tag que existe.
         const img = document.getElementById("robotron");
         const btnPrev = document.getElementById("btnPrev");
         const btnNext = document.getElementById("btnNext");
 
-        // coloca a primeira imagem automaticamente
-        img.src = imagens[0];
+        // Já está correto no HTML, mas esta linha garante que a array é usada
+        // img.src = imagens[0]; 
 
+        // Função para voltar para a imagem anterior (botão <<)
         btnPrev.onclick = function () {
             indice--;
+            // Verifica se o índice é menor que 0 (primeira imagem). Se for, volta para o final (loop).
             if (indice < 0) {
                 indice = imagens.length - 1;
             }
             img.src = imagens[indice];
         };
 
+        // Função para avançar para a próxima imagem (botão >>)
         btnNext.onclick = function () {
             indice++;
+            // Verifica se o índice é maior ou igual ao tamanho da array (última imagem). Se for, volta para o 0 (loop).
             if (indice >= imagens.length) {
                 indice = 0;
             }
