@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9; /* Cor de fundo da página */
+            background-color: #f4f4f9;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -15,7 +15,7 @@
         }
 
         .container {
-            background-color: #ffffff; /* Cor de fundo do formulário (branco) */
+            background-color: #ffffff;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -77,7 +77,7 @@
             padding: 15px;
             border-radius: 5px;
             font-weight: bold;
-            display: none; /* Escondida por padrão */
+            display: none;
         }
 
         .sucesso {
@@ -143,10 +143,10 @@
             <label>Atividades Extracurriculares (Máximo 3):</label>
             <label><input type="checkbox" name="extracurricular" value="informatica"> Informática</label>
             <label><input type="checkbox" name="extracurricular" value="musica"> Música</label>
-            <label><input type="checkbox" name="ballet"> Ballet</label>
-            <label><input type="checkbox" name="pintura"> Pintura</label>
-            <label><input type="checkbox" name="judo"> Judô</label>
-            <label><input type="checkbox" name="futebol"> Futebol</label>
+            <label><input type="checkbox" name="extracurricular" value="ballet"> Ballet</label>
+            <label><input type="checkbox" name="extracurricular" value="pintura"> Pintura</label>
+            <label><input type="checkbox" name="extracurricular" value="judo"> Judô</label>
+            <label><input type="checkbox" name="extracurricular" value="futebol"> Futebol</label>
         </div>
 
         <button type="submit" id="enviar">Enviar Formulário</button>
@@ -161,7 +161,7 @@
     const form = document.getElementById('form-matricula');
     const feedback = document.getElementById('mensagem-feedback');
 
-    // Lista COMPLETA de DDDs válidos no Brasil (67 códigos, abrangendo todas as áreas)
+    // Lista COMPLETA de DDDs válidos no Brasil
     const dddsValidos = [
         11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34, 35, 37, 38, 
         41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62, 63, 64, 65, 66, 67, 68, 
@@ -186,7 +186,6 @@
 
         // --- 2. VALIDAÇÃO DE DATA (Formato básico DD/MM/AAAA) ---
         const nascimentoInput = document.getElementById('nascimento').value.trim();
-        // Verifica se tem 10 caracteres e se as barras estão no lugar certo
         if (nascimentoInput.length !== 10 || nascimentoInput.charAt(2) !== '/' || nascimentoInput.charAt(5) !== '/') {
             erros.push('Data de Nascimento inválida. Use o formato **DD/MM/AAAA**.');
         }
@@ -199,7 +198,6 @@
 
         // --- 4. VALIDAÇÃO DE DDD VÁLIDO ---
         const dddInput = parseInt(document.getElementById('ddd').value.trim());
-        // Verifica se o campo não está vazio E se o DDD não está na lista
         if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
              erros.push('DDD inválido. Por favor, use um DDD válido do Brasil.');
         }
@@ -211,19 +209,18 @@
         }
 
         // --- 6. VALIDAÇÃO DE EXTRACURRICULARES (Máximo 3) ---
+        // A QUERY AGORA ESTÁ CORRETA, POIS TODOS OS CHECKBOXES TÊM name="extracurricular"
         const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
         if (checkBoxes.length > 3) {
-            erros.push('Selecione **no máximo 3** atividades Extracurriculares. Você selecionou ' + checkBoxes.length + '.');
+            erros.push(`Selecione **no máximo 3** atividades Extracurriculares. Você selecionou ${checkBoxes.length}.`);
         }
 
         // --- RESULTADO DA VALIDAÇÃO E FEEDBACK ---
         if (erros.length > 0) {
-            // ERRO
             feedback.className = 'erro';
             feedback.innerHTML = `🚨 **Ocorreu um Erro no Formulário!**<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
             feedback.style.display = 'block';
         } else {
-            // SUCESSO
             feedback.className = 'sucesso';
             feedback.innerHTML = '✅ **Sucesso!** Cadastro realizado com sucesso!';
             feedback.style.display = 'block';
