@@ -174,7 +174,7 @@
         feedback.style.display = 'none';
         let erros = [];
 
-        // --- 1. VALIDAÇÃO DE OBRIGATÓRIOS ---
+        
         const camposObrigatorios = ['nome', 'nascimento', 'nomeMae', 'nomePai', 'ddd', 'tel', 'email', 'serie'];
         
         camposObrigatorios.forEach(id => {
@@ -184,38 +184,34 @@
             }
         });
 
-        // --- 2. VALIDAÇÃO DE DATA (Formato básico DD/MM/AAAA) ---
+        
         const nascimentoInput = document.getElementById('nascimento').value.trim();
         if (nascimentoInput.length !== 10 || nascimentoInput.charAt(2) !== '/' || nascimentoInput.charAt(5) !== '/') {
             erros.push('Data de Nascimento inválida. Use o formato **DD/MM/AAAA**.');
         }
         
-        // --- 3. VALIDAÇÃO DE E-MAIL (Apenas se contém @) ---
+        
         const emailInput = document.getElementById('email').value.trim();
         if (emailInput.indexOf('@') === -1) {
             erros.push('E-Mail precisa ter o caractere **@**.');
         }
 
-        // --- 4. VALIDAÇÃO DE DDD VÁLIDO ---
         const dddInput = parseInt(document.getElementById('ddd').value.trim());
         if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
              erros.push('DDD inválido. Por favor, use um DDD válido do Brasil.');
         }
 
-        // --- 5. VALIDAÇÃO DE TURNO (Obrigatório) ---
         const turnoSelecionado = form.querySelector('input[name="turno"]:checked');
         if (!turnoSelecionado) {
             erros.push('Selecione o **Turno** (Manhã ou Tarde).');
         }
 
-        // --- 6. VALIDAÇÃO DE EXTRACURRICULARES (Máximo 3) ---
-        // A QUERY AGORA ESTÁ CORRETA, POIS TODOS OS CHECKBOXES TÊM name="extracurricular"
+    
         const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
         if (checkBoxes.length > 3) {
             erros.push(`Selecione **no máximo 3** atividades Extracurriculares. Você selecionou ${checkBoxes.length}.`);
         }
 
-        // --- RESULTADO DA VALIDAÇÃO E FEEDBACK ---
         if (erros.length > 0) {
             feedback.className = 'erro';
             feedback.innerHTML = `🚨 **Ocorreu um Erro no Formulário!**<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
