@@ -31,7 +31,7 @@
         }
 
         img {
-            width: 250px; /* ajuste se quiser */
+            width: 250px; 
         }
     </style>
 </head>
@@ -52,7 +52,7 @@
     </div>
 
     <script>
-        // Array com os nomes dos arquivos das imagens
+      
         const imagens = [
             "robotron-amarelo.png",
             "robotron-azul.png",
@@ -68,20 +68,19 @@
         const btnPrev = document.getElementById("btnPrev");
         const btnNext = document.getElementById("btnNext");
 
-        // Função para voltar para a imagem anterior (botão <<)
+      
         btnPrev.onclick = function () {
             indice--;
-            // Volta para o último item se passar do primeiro
+         
             if (indice < 0) {
                 indice = imagens.length - 1;
             }
             img.src = imagens[indice];
         };
 
-        // Função para avançar para a próxima imagem (botão >>)
         btnNext.onclick = function () {
             indice++;
-            // Volta para o primeiro item se passar do último
+         
             if (indice >= imagens.length) {
                 indice = 0;
             }
