@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade 06 - Gestão de Gastos</title>
+    <style>
+        /* CSS para estilização */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px;
+        }
+
+        .secao {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 450px;
+            min-width: 350px;
+        }
+
+        h2 {
+            border-bottom: 2px solid #5cb85c; /* Verde */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 18px);
+        }
+
+        .inputs-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .inputs-group > div {
+            flex: 1;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100px;
+            margin-top: 10px;
+        }
+
+        #adicionar {
+            background-color: #5cb85c; /* Verde */
+            color: white;
+            margin-right: 10px;
+        }
+        
+        #calcular {
+            background-color: #007bff; /* Azul */
+            color: white;
+        }
+
+        /* Tabela Extrato */
+        #extrato-tabela {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #extrato-tabela th, #extrato-tabela td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        #extrato-tabela th {
+            background-color: #f2f2f2;
+        }
+        
+        /* Resumo */
+        #resumo-div {
+            border-left: 5px solid #007bff;
+            padding-left: 20px;
+        }
+        
+        #resumo-div h3 {
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="secao">
+    <h2>Entrada de Gastos</h2>
+
+    <div>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria">
+            <option value="Mercado">Mercado</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Outros">Outros</option>
+        </select>
+    </div>
+
+    <div class="inputs-group">
+        <div>
+            <label for="valor">Valor:</label>
+            <input type="number" id="valor" min="0.01" step="0.01" required>
+        </div>
+        <div>
+            <label for="data">Data:</label>
+            <input type="date" id="data" required>
+        </div>
+    </div>
+    
+    <button id="adicionar">Adicionar</button>
+    <button id="calcular">Calcular</button>
+
+    <h3>Extrato Bancário</h3>
+    <table id="extrato-tabela">
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Data</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody id="extrato-body">
+            </tbody>
+    </table>
+</div>
+
+<div class="secao" id="resumo-div">
+    <h2>Resumo</h2>
+    <div id="resumo-conteudo">
+        <p>Clique em "Calcular" para ver o resumo dos gastos.</p>
+    </div>
+</div>
+
+<script>
+    const categoriaInput = document.getElementById('categoria');
+    const valorInput = document.getElementById('valor');
+    const dataInput = document.getElementById('data');
+    const extratoBody = document.getElementById('extrato-body');
+    const resumoConteudo = document.getElementById('resumo-conteudo');
+    const adicionarBtn = document.getElementById('adicionar');
+    const calcularBtn = document.getElementById('calcular');
+
+    // Array para armazenar os dados do extrato
+    let extrato = [];
+
+    // Função para adicionar um novo gasto à tabela
+    adicionarBtn.addEventListener('click', function() {
+        const categoria = categoriaInput.value;
+        const valor = parseFloat(valorInput.value);
+        const data = dataInput.value; // Formato YYYY-MM-DD
+
+        // Validação básica
+        if (!categoria || isNaN(valor) || valor <= 0 || !data) {
+            alert("Por favor, preencha a Categoria, um Valor positivo e a Data.");
+            return;
+        }
+
+        // 1. Armazena o gasto no Array (Objeto)
+        extrato.push({ categoria, valor, data });
+
+        // 2. Cria a nova linha na tabela
+        const newRow = extratoBody.insertRow();
+        
+        // Formata a data para DD/MM/AAAA
+        const [ano, mes, dia] = data.split('-');
+        const dataFormatada = `${dia}/${mes}/${ano}`;
+
+        // Adiciona as células
+        newRow.insertCell(0).textContent = categoria;
+        newRow.insertCell(1).textContent = dataFormatada;
+        newRow.insertCell(2).textContent = valor.toFixed(2).replace('.', ','); // Formato R$
+
+        // 3. Limpa os campos de input
+        valorInput.value = '';
+        dataInput.value = '';
+        
+        // Limpa o resumo ao adicionar novo item
+        resumoConteudo.innerHTML = '<p>Clique em "Calcular" para ver o resumo dos gastos.</p>';
+    });
+
+    // Função para calcular e exibir o resumo
+    calcularBtn.addEventListener('click', function() {
+        if (extrato.length === 0) {
+            resumoConteudo.innerHTML = '<h3>Nenhum gasto adicionado ao extrato.</h3>';
+            return;
+        }
+
+        // --- Variáveis de Resumo ---
+        let totalGeral = 0;
+        let totalPorMes = {}; // Ex: { "03": 136.20, "04": 36.30 }
+        let totalPorCategoria = {}; // Ex: { "Mercado": 36.30 }
+
+        // --- Processamento do Extrato ---
+        extrato.forEach(item => {
+            // A. TOTAL GERAL
+            totalGeral += item.valor;
+
+            // B. TOTAL POR MÊS (Pega o mês da data YYYY-MM-DD)
+            const mes = item.data.substring(5, 7); 
+            if (!totalPorMes[mes]) {
+                totalPorMes[mes] = 0;
+            }
+            totalPorMes[mes] += item.valor;
+            
+            // C. TOTAL POR CATEGORIA
+            const categoria = item.categoria;
+            if (!totalPorCategoria[categoria]) {
+                totalPorCategoria[categoria] = 0;
+            }
+            totalPorCategoria[categoria] += item.valor;
+        });
+
+        // --- Montagem do HTML de Resumo ---
+        let htmlResumo = '<h3>Resultado da Análise</h3>';
+        
+        // 1. Total Geral
+        htmlResumo += `<p>Total Geral: <strong>R$ ${totalGeral.toFixed(2).replace('.', ',')}</strong></p>`;
+
+        // 2. Totais por Mês
+        Object.keys(totalPorMes).sort().forEach(mes => {
+            const valor = totalPorMes[mes].toFixed(2).replace('.', ',');
+            htmlResumo += `<p>Total no Mês ${mes}: <strong>R$ ${valor}</strong></p>`;
+        });
+
+        // 3. Totais por Categoria (Exemplo: Total de gastos com Mercado: 36,30)
+        Object.keys(totalPorCategoria).sort().forEach(cat => {
+            const valor = totalPorCategoria[cat].toFixed(2).replace('.', ',');
+            htmlResumo += `<p>Total de gastos com ${cat}: <strong>R$ ${valor}</strong></p>`;
+        });
+        
+        // Exibe o resultado
+        resumoConteudo.innerHTML = htmlResumo;
+    });
+</script>
+</body>
+</html>
