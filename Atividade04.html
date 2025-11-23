@@ -2,49 +2,44 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Atividade 04 - Robotron Contador</title>
+    <title>Atividade 04 - Robotron Simples</title>
     <style>
-      
+        /* ------------------------------------- */
+        /* CSS MÍNIMO */
+        /* ------------------------------------- */
         body {
             font-family: Arial, sans-serif;
-            background-color: #2c3e50; 
-            color: #ecf0f1; 
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 40px;
-            min-height: 100vh;
-            margin: 0;
         }
 
         .container-robotron {
             display: flex;
-            gap: 50px;
+            gap: 40px;
             align-items: center;
-            background-color: #34495e; 
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border: 1px solid #ccc; /* Apenas uma borda para delimitar */
+            border-radius: 5px;
         }
 
         .controles {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            width: 300px;
+            gap: 15px;
+            width: 250px;
         }
 
         .peca {
-            background-color: #2c3e50;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #7f8c8d;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 3px;
         }
 
         .peca h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.1em;
-            text-transform: uppercase;
+            margin: 0 0 5px 0;
+            font-size: 1em;
         }
 
         .controle-valor {
@@ -54,28 +49,26 @@
         }
 
         .controle-valor button {
-            background-color: #3498db; 
-            color: white;
-            border: none;
+            background-color: #f0f0f0; /* Botões cinza claro */
+            color: #333;
+            border: 1px solid #ccc;
             padding: 5px 12px;
-            font-size: 1.2em;
+            font-size: 1em;
             cursor: pointer;
             border-radius: 3px;
         }
 
         .valor {
-            background-color: #202b38; 
-            color: #1abc9c; 
+            color: #000;
             padding: 5px 15px;
-            border-radius: 3px;
-            font-size: 1.4em;
+            font-size: 1.2em;
             font-weight: bold;
-            min-width: 40px;
+            min-width: 30px;
             text-align: center;
         }
 
         .robotron-img {
-            max-width: 250px;
+            max-width: 200px;
             height: auto;
         }
     </style>
@@ -85,7 +78,7 @@
 <div class="container-robotron">
     <div class="controles">
         <div class="peca" data-peca="bracos">
-            <h3>Braços</h3>
+            <h3>BRAÇOS</h3>
             <div class="controle-valor">
                 <button data-acao="diminuir">-</button>
                 <div class="valor" id="bracos-valor">00</div>
@@ -94,7 +87,7 @@
         </div>
 
         <div class="peca" data-peca="blindagem">
-            <h3>Blindagem</h3>
+            <h3>BLINDAGEM</h3>
             <div class="controle-valor">
                 <button data-acao="diminuir">-</button>
                 <div class="valor" id="blindagem-valor">00</div>
@@ -103,7 +96,7 @@
         </div>
         
         <div class="peca" data-peca="nucleos">
-            <h3>Núcleos</h3>
+            <h3>NÚCLEOS</h3>
             <div class="controle-valor">
                 <button data-acao="diminuir">-</button>
                 <div class="valor" id="nucleos-valor">00</div>
@@ -112,7 +105,7 @@
         </div>
 
         <div class="peca" data-peca="pernas">
-            <h3>Pernas</h3>
+            <h3>PERNAS</h3>
             <div class="controle-valor">
                 <button data-acao="diminuir">-</button>
                 <div class="valor" id="pernas-valor">00</div>
@@ -122,35 +115,26 @@
     </div>
     
     <div>
-        <img class="robotron-img" src="robotron-branco.png" alt="Robotron">
+        <img class="robotron-img" src="IMAGEM_DO_ROBOTRON_AQUI" alt="Robotron">
     </div>
 
 </div>
 
 <script>
-  
+    // -------------------------------------
+    // LÓGICA JAVASCRIPT: CONTADOR 00-10
+    // -------------------------------------
     const botoesControle = document.querySelectorAll('.controle-valor button');
-
-    // Limites de valor
     const VALOR_MINIMO = 0;
     const VALOR_MAXIMO = 10;
 
-    
     botoesControle.forEach(botao => {
         botao.addEventListener('click', (evento) => {
-            
             const pecaDiv = evento.target.closest('.peca');
-            
-           
             const valorDisplay = pecaDiv.querySelector('.valor');
-            
-           
             const acao = evento.target.dataset.acao;
-            
-            
             let valorAtual = parseInt(valorDisplay.textContent, 10);
 
-            
             if (acao === 'aumentar') {
                 if (valorAtual < VALOR_MAXIMO) {
                     valorAtual++;
@@ -161,6 +145,7 @@
                 }
             }
 
+            // Garante a formatação "00" a "10"
             valorDisplay.textContent = valorAtual.toString().padStart(2, '0');
         });
     });
