@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Atividade 04 - Robotron Simples</title>
     <style>
-        /* ------------------------------------- */
-        /* CSS MÍNIMO */
-        /* ------------------------------------- */
+        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -20,7 +18,7 @@
             gap: 40px;
             align-items: center;
             padding: 20px;
-            border: 1px solid #ccc; /* Apenas uma borda para delimitar */
+            border: 1px solid #ccc; 
             border-radius: 5px;
         }
 
@@ -49,7 +47,7 @@
         }
 
         .controle-valor button {
-            background-color: #f0f0f0; /* Botões cinza claro */
+            background-color: #f0f0f0;
             color: #333;
             border: 1px solid #ccc;
             padding: 5px 12px;
@@ -121,9 +119,7 @@
 </div>
 
 <script>
-    // -------------------------------------
-    // LÓGICA JAVASCRIPT: CONTADOR 00-10
-    // -------------------------------------
+    
     const botoesControle = document.querySelectorAll('.controle-valor button');
     const VALOR_MINIMO = 0;
     const VALOR_MAXIMO = 10;
@@ -145,7 +141,6 @@
                 }
             }
 
-            // Garante a formatação "00" a "10"
             valorDisplay.textContent = valorAtual.toString().padStart(2, '0');
         });
     });
