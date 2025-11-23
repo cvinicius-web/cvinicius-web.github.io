@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <title>Atividade 06 - Gestão de Gastos Simples</title>
     <style>
-        /* CSS SIMPLIFICADO */
+        
         body { 
             font-family: sans-serif; 
             display: flex; 
             gap: 20px; 
             padding: 20px; 
-            background-color: #f0f0f0; /* Cinza claro */
+            background-color: #f0f0f0; 
         }
         
         .secao { 
             background-color: white; 
             padding: 15px; 
             border-radius: 5px; 
-            box-shadow: 1px 1px 3px rgba(0,0,0,0.1); /* Sombra mais discreta */
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.1); 
         }
         
         h2 { 
-            border-bottom: 1px solid #ccc; /* Borda simples e cinza */
+            border-bottom: 1px solid #ccc; 
             padding-bottom: 5px; 
             margin-bottom: 10px; 
         }
@@ -43,12 +43,12 @@
         }
         
         #adicionar { 
-            background-color: #32CD32; /* Verde */
+            background-color: #32CD32; 
             color: white; 
         }
         
         #calcular { 
-            background-color: #1E90FF; /* Azul */
+            background-color: #1E90FF;
             color: white; 
         }
         
@@ -65,11 +65,11 @@
         }
         
         th {
-             background-color: #f7f7f7; /* Cabeçalho da tabela */
+             background-color: #f7f7f7;
         }
         
         #resumo-div { 
-            border-left: 3px solid #1E90FF; /* Borda vertical simples */
+
             padding-left: 10px; 
         }
     </style>
@@ -126,10 +126,10 @@
     const resumoConteudo = document.getElementById('resumo-conteudo');
     const extrato = [];
 
-    // Função auxiliar para formatação de moeda
+ 
     const formatarMoeda = (valor) => 'R$ ' + valor.toFixed(2).replace('.', ',');
 
-    // --- ADICIONAR ITEM ---
+    
     document.getElementById('adicionar').addEventListener('click', function() {
         const categoria = categoriaInput.value;
         const valor = parseFloat(valorInput.value);
@@ -143,7 +143,7 @@
         extrato.push({ categoria, valor, data });
 
         const newRow = extratoBody.insertRow();
-        const dataFormatada = data.split('-').reverse().join('/'); // YYYY-MM-DD -> DD/MM/YYYY
+        const dataFormatada = data.split('-').reverse().join('/'); 
         
         newRow.insertCell(0).textContent = categoria;
         newRow.insertCell(1).textContent = dataFormatada;
@@ -153,7 +153,7 @@
         resumoConteudo.innerHTML = '<p>Clique em "Calcular" para ver o resumo.</p>';
     });
 
-    // --- CALCULAR RESUMO ---
+   
     document.getElementById('calcular').addEventListener('click', function() {
         if (extrato.length === 0) {
             resumoConteudo.innerHTML = '<h3>Nenhum gasto para analisar.</h3>';
@@ -174,16 +174,16 @@
             totalPorCategoria[cat] = (totalPorCategoria[cat] || 0) + item.valor;
         });
 
-        // --- Montagem do HTML de Resumo ---
+       
         let html = '<h3>Resumo</h3>';
         html += `<p>Total Geral: <strong>${formatarMoeda(totalGeral)}</strong></p>`;
 
-        // Totais por Mês
+       
         Object.keys(totalPorMes).sort().forEach(mes => {
             html += `<p>Total no Mês ${mes}: ${formatarMoeda(totalPorMes[mes])}</p>`;
         });
 
-        // Totais por Categoria
+    
         Object.keys(totalPorCategoria).sort().forEach(cat => {
             html += `<p>Total de gastos com ${cat}: <strong>${formatarMoeda(totalPorCategoria[cat])}</strong></p>`;
         });
