@@ -143,7 +143,7 @@
             <label>Atividades Extracurriculares (Máximo 3):</label>
             <label><input type="checkbox" name="extracurricular" value="informatica"> Informática</label>
             <label><input type="checkbox" name="extracurricular" value="musica"> Música</label>
-            <label><input type="checkbox" name="extracurricular" value="ballet"> Ballet</label>
+            <label><input type="checkbox" name="ballet"> Ballet</label>
             <label><input type="checkbox" name="pintura"> Pintura</label>
             <label><input type="checkbox" name="judo"> Judô</label>
             <label><input type="checkbox" name="futebol"> Futebol</label>
@@ -161,8 +161,13 @@
     const form = document.getElementById('form-matricula');
     const feedback = document.getElementById('mensagem-feedback');
 
-    // Lista de DDDs válidos no Brasil (Lista simplificada)
-    const dddsValidos = [11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 41, 51, 61, 71, 81, 91];
+    // Lista COMPLETA de DDDs válidos no Brasil (67 códigos, abrangendo todas as áreas)
+    const dddsValidos = [
+        11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34, 35, 37, 38, 
+        41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62, 63, 64, 65, 66, 67, 68, 
+        69, 71, 73, 74, 75, 77, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93, 94, 95, 
+        96, 97, 98, 99
+    ];
 
     form.addEventListener('submit', function(event) {
         event.preventDefault(); 
@@ -194,6 +199,7 @@
 
         // --- 4. VALIDAÇÃO DE DDD VÁLIDO ---
         const dddInput = parseInt(document.getElementById('ddd').value.trim());
+        // Verifica se o campo não está vazio E se o DDD não está na lista
         if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
              erros.push('DDD inválido. Por favor, use um DDD válido do Brasil.');
         }
@@ -207,7 +213,7 @@
         // --- 6. VALIDAÇÃO DE EXTRACURRICULARES (Máximo 3) ---
         const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
         if (checkBoxes.length > 3) {
-            erros.push('Selecione **no máximo 3** atividades Extracurriculares.');
+            erros.push('Selecione **no máximo 3** atividades Extracurriculares. Você selecionou ' + checkBoxes.length + '.');
         }
 
         // --- RESULTADO DA VALIDAÇÃO E FEEDBACK ---
@@ -219,7 +225,7 @@
         } else {
             // SUCESSO
             feedback.className = 'sucesso';
-            feedback.innerHTML = '✅ **Sucesso!** Cadastro realizado com sucesso.';
+            feedback.innerHTML = '✅ **Sucesso!** Cadastro realizado com sucesso!';
             feedback.style.display = 'block';
             form.reset(); 
         }
