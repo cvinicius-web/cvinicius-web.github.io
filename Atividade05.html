@@ -1,81 +1,233 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Atividade 05</title>
-<style>
-  body { font-family: Arial; padding: 20px; background:#f3f3f3; }
-  .caixa { background:white; padding:15px; border-radius:8px; width:260px; }
-  label { display:block; margin-top:10px; }
-  input { width:95%; padding:4px; margin-top:5px; }
-  button { margin-top:10px; padding:6px 10px; }
-  #msg { margin-top:10px; font-weight:bold; }
-</style>
+    <meta charset="UTF-8">
+    <title>Escola Virtual - Pré-Matrícula</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9; /* Cor de fundo da página */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 50px;
+        }
+
+        .container {
+            background-color: #ffffff; /* Cor de fundo do formulário (branco) */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 95%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .radio-group, .checkbox-group {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+
+        .radio-group label, .checkbox-group label {
+            display: inline-block;
+            margin-right: 15px;
+            font-weight: normal;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #mensagem-feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none; /* Escondida por padrão */
+        }
+
+        .sucesso {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .erro {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Formulário Simples</h2>
+<div class="container">
+    <h2>Formulário de Pré-Matrícula</h2>
+    <form id="form-matricula">
 
-<div class="caixa">
-  <label>Nome do Aluno</label>
-  <input id="aluno" type="text">
+        <h3>Dados Pessoais</h3>
+        
+        <label for="nome">Nome do Aluno:</label>
+        <input type="text" id="nome" name="nome">
 
-  <label>Data de Nascimento</label>
-  <input id="nasc" type="date">
+        <label for="nascimento">Nascimento (dd/mm/aaaa):</label>
+        <input type="text" id="nascimento" name="nascimento" placeholder="Ex: 31/12/2010">
 
-  <label>Email</label>
-  <input id="email" type="text">
+        <label for="nomeMae">Nome da Mãe:</label>
+        <input type="text" id="nomeMae" name="nomeMae">
 
-  <label>DDD</label>
-  <input id="ddd" type="text" maxlength="3">
+        <label for="nomePai">Nome do Pai:</label>
+        <input type="text" id="nomePai" name="nomePai">
 
-  <label>Telefone</label>
-  <input id="tel" type="text">
+        <label>Telefone:</label>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="ddd" name="ddd" placeholder="DDD" style="width: 70px;">
+            <input type="text" id="tel" name="tel" placeholder="Tel" style="flex-grow: 1;">
+            <input type="text" id="ramal" name="ramal" placeholder="Ramal" style="width: 80px;" disabled>
+        </div>
 
-  <label>Atividades (máx 3)</label>
-  <input type="checkbox" class="atv"> Música<br>
-  <input type="checkbox" class="atv"> Futebol<br>
-  <input type="checkbox" class="atv"> Informática<br>
-  <input type="checkbox" class="atv"> Dança<br>
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" name="email">
+        
+        <h3>Informações de Matrícula</h3>
 
-  <button onclick="enviarForm()">Enviar</button>
-  <p id="msg"></p>
+        <label for="serie">Série:</label>
+        <select id="serie" name="serie">
+            <option value="">Selecione a Série</option>
+            <option value="pre-escolar">Pré-escolar</option>
+            <option value="fundamental-1">Fundamental I</option>
+            <option value="fundamental-2">Fundamental II</option>
+        </select>
+
+        <div class="radio-group">
+            <label>Turno:</label>
+            <label><input type="radio" name="turno" value="manha"> Manhã</label>
+            <label><input type="radio" name="turno" value="tarde"> Tarde</label>
+        </div>
+        
+        <div class="checkbox-group">
+            <label>Atividades Extracurriculares (Máximo 3):</label>
+            <label><input type="checkbox" name="extracurricular" value="informatica"> Informática</label>
+            <label><input type="checkbox" name="extracurricular" value="musica"> Música</label>
+            <label><input type="checkbox" name="extracurricular" value="ballet"> Ballet</label>
+            <label><input type="checkbox" name="pintura"> Pintura</label>
+            <label><input type="checkbox" name="judo"> Judô</label>
+            <label><input type="checkbox" name="futebol"> Futebol</label>
+        </div>
+
+        <button type="submit" id="enviar">Enviar Formulário</button>
+        <button type="reset" id="limpar">Limpa Campos</button>
+        
+    </form>
+    
+    <div id="mensagem-feedback" style="display: none;"></div>
 </div>
 
 <script>
-function enviarForm() {
-  let aluno = document.getElementById('aluno').value;
-  let nasc  = document.getElementById('nasc').value;
-  let email = document.getElementById('email').value;
-  let ddd   = document.getElementById('ddd').value;
-  let tel   = document.getElementById('tel').value;
-  let atv   = document.querySelectorAll('.atv:checked');
-  let msg   = document.getElementById('msg');
+    const form = document.getElementById('form-matricula');
+    const feedback = document.getElementById('mensagem-feedback');
 
-  if (!aluno || !nasc || !email || !ddd || !tel) {
-    msg.textContent = "Preencha todos os campos.";
-    return;
-  }
+    // Lista de DDDs válidos no Brasil (Lista simplificada)
+    const dddsValidos = [11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 41, 51, 61, 71, 81, 91];
 
-  if (!email.includes('@')) {
-    msg.textContent = "Email inválido.";
-    return;
-  }
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        feedback.style.display = 'none';
+        let erros = [];
 
-  let ddds = ["11","21","31","41","51","61","71"];
-  if (!ddds.includes(ddd)) {
-    msg.textContent = "DDD inválido.";
-    return;
-  }
+        // --- 1. VALIDAÇÃO DE OBRIGATÓRIOS ---
+        const camposObrigatorios = ['nome', 'nascimento', 'nomeMae', 'nomePai', 'ddd', 'tel', 'email', 'serie'];
+        
+        camposObrigatorios.forEach(id => {
+            const campo = document.getElementById(id);
+            if (campo.value.trim() === '') {
+                erros.push(`O campo **${campo.name.toUpperCase()}** é obrigatório.`);
+            }
+        });
 
-  if (atv.length > 3) {
-    msg.textContent = "Máximo 3 atividades.";
-    return;
-  }
+        // --- 2. VALIDAÇÃO DE DATA (Formato básico DD/MM/AAAA) ---
+        const nascimentoInput = document.getElementById('nascimento').value.trim();
+        // Verifica se tem 10 caracteres e se as barras estão no lugar certo
+        if (nascimentoInput.length !== 10 || nascimentoInput.charAt(2) !== '/' || nascimentoInput.charAt(5) !== '/') {
+            erros.push('Data de Nascimento inválida. Use o formato **DD/MM/AAAA**.');
+        }
+        
+        // --- 3. VALIDAÇÃO DE E-MAIL (Apenas se contém @) ---
+        const emailInput = document.getElementById('email').value.trim();
+        if (emailInput.indexOf('@') === -1) {
+            erros.push('E-Mail precisa ter o caractere **@**.');
+        }
 
-  msg.textContent = "Cadastro enviado!";
-}
+        // --- 4. VALIDAÇÃO DE DDD VÁLIDO ---
+        const dddInput = parseInt(document.getElementById('ddd').value.trim());
+        if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
+             erros.push('DDD inválido. Por favor, use um DDD válido do Brasil.');
+        }
+
+        // --- 5. VALIDAÇÃO DE TURNO (Obrigatório) ---
+        const turnoSelecionado = form.querySelector('input[name="turno"]:checked');
+        if (!turnoSelecionado) {
+            erros.push('Selecione o **Turno** (Manhã ou Tarde).');
+        }
+
+        // --- 6. VALIDAÇÃO DE EXTRACURRICULARES (Máximo 3) ---
+        const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
+        if (checkBoxes.length > 3) {
+            erros.push('Selecione **no máximo 3** atividades Extracurriculares.');
+        }
+
+        // --- RESULTADO DA VALIDAÇÃO E FEEDBACK ---
+        if (erros.length > 0) {
+            // ERRO
+            feedback.className = 'erro';
+            feedback.innerHTML = `🚨 **Ocorreu um Erro no Formulário!**<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
+            feedback.style.display = 'block';
+        } else {
+            // SUCESSO
+            feedback.className = 'sucesso';
+            feedback.innerHTML = '✅ **Sucesso!** Cadastro realizado com sucesso.';
+            feedback.style.display = 'block';
+            form.reset(); 
+        }
+    });
+
+    document.getElementById('limpar').addEventListener('click', function() {
+        feedback.style.display = 'none';
+    });
 </script>
-
 </body>
 </html>
