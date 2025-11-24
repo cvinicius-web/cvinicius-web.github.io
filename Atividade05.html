@@ -77,7 +77,6 @@
         <div style="display: flex; gap: 5px;">
             <input type="text" id="ddd" name="ddd" placeholder="DDD" style="width: 70px;">
             <input type="text" id="tel" name="tel" placeholder="Tel" style="flex-grow: 1;">
-            <input type="text" id="ramal" name="ramal" placeholder="Ramal" style="width: 80px;" disabled>
         </div>
 
         <label for="email">E-Mail:</label>
@@ -118,8 +117,8 @@
 </div>
 
 <script>
-    const form = document.getElementById('form-matricula');
-    const feedback = document.getElementById('mensagem-feedback');
+    const form = document.getElementById("form-matricula");
+    const feedback = document.getElementById("mensagem-feedback");
 
     const dddsValidos = [
         11,12,13,14,15,16,17,18,19,21,22,24,27,28,31,32,33,34,35,37,38,
@@ -128,60 +127,70 @@
         96,97,98,99
     ];
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault(); 
-        feedback.style.display = 'none';
+    form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        feedback.style.display = "none";
+
         let erros = [];
 
-        const camposObrigatorios = ['nome','nascimento','nomeMae','nomePai','ddd','tel','email','serie'];
         
-        camposObrigatorios.forEach(id => {
-            const campo = document.getElementById(id);
-            if (campo.value.trim() === '') {
-                erros.push(`O campo ${campo.name.toUpperCase()} é obrigatório.`);
+        const obrigatorios = ["nome","nascimento","nomeMae","nomePai","ddd","tel","email","serie"];
+        obrigatorios.forEach(id => {
+            if (!document.getElementById(id).value.trim()) {
+                erros.push(`O campo ${id.toUpperCase()} é obrigatório.`);
             }
         });
 
-        const nascimentoInput = document.getElementById('nascimento').value.trim();
-        if (nascimentoInput.length !== 10 || nascimentoInput.charAt(2) !== '/' || nascimentoInput.charAt(5) !== '/') {
-            erros.push('Data de Nascimento inválida. Use DD/MM/AAAA.');
-        }
         
-        const emailInput = document.getElementById('email').value.trim();
-        if (emailInput.indexOf('@') === -1) {
-            erros.push('E-Mail precisa ter @.');
+        const data = document.getElementById("nascimento").value.trim();
+        if (!/^\d{2}\/\d{2}\/\d{4}$/.test(data)) {
+            erros.push("Data de Nascimento inválida. Use DD/MM/AAAA.");
         }
 
-        const dddInput = parseInt(document.getElementById('ddd').value.trim());
-        if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
-             erros.push('DDD inválido.');
+        
+        const email = document.getElementById("email").value.trim();
+        if (!email.includes("@")) {
+            erros.push("E-Mail precisa ter @.");
         }
 
-        const turnoSelecionado = form.querySelector('input[name="turno"]:checked');
-        if (!turnoSelecionado) {
-            erros.push('Selecione o Turno.');
+        
+        const ddd = Number(document.getElementById("ddd").value.trim());
+        if (!dddsValidos.includes(ddd)) {
+            erros.push("DDD inválido.");
         }
 
-        const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
-        if (checkBoxes.length > 3) {
-            erros.push(`Selecione no máximo 3 atividades. Você marcou ${checkBoxes.length}.`);
+        
+        if (!form.querySelector('input[name="turno"]:checked')) {
+            erros.push("Selecione o Turno.");
         }
 
-        if (erros.length > 0) {
-            feedback.className = 'erro';
-            feedback.innerHTML = `Erro no Formulário:<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
-            feedback.style.display = 'block';
+        
+        const extras = form.querySelectorAll('input[name="extracurricular"]:checked');
+        if (extras.length > 3) {
+            erros.push(`Selecione no máximo 3 atividades. Você marcou ${extras.length}.`);
+        }
+
+        
+        if (erros.length) {
+            feedback.className = "erro";
+            feedback.innerHTML = `
+                <strong>Erros encontrados:</strong>
+                <ul>${erros.map(e => `<li>${e}</li>`).join("")}</ul>
+            `;
         } else {
-            feedback.className = 'sucesso';
-            feedback.innerHTML = 'Cadastro realizado com sucesso!';
-            feedback.style.display = 'block';
-            form.reset(); 
+            feedback.className = "sucesso";
+            feedback.innerHTML = "Cadastro realizado com sucesso!";
+            form.reset();
         }
+
+        feedback.style.display = "block";
     });
 
-    document.getElementById('limpar').addEventListener('click', function() {
-        feedback.style.display = 'none';
+    document.getElementById("limpar").addEventListener("click", () => {
+        feedback.style.display = "none";
     });
 </script>
+
 </body>
 </html>
+                
