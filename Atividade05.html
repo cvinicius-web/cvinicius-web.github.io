@@ -7,89 +7,49 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding-top: 50px;
+            padding: 20px;
         }
 
         .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
+            margin: auto;
         }
 
         h2 {
             text-align: center;
-            color: #333;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
             margin-bottom: 20px;
         }
 
         label {
             display: block;
             margin-top: 10px;
-            font-weight: bold;
         }
 
         input[type="text"], input[type="email"], select {
-            width: 95%;
-            padding: 8px;
+            width: 100%;
+            padding: 6px;
             margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            border: 1px solid #000;
         }
 
         .radio-group, .checkbox-group {
             margin-top: 10px;
+            border: 1px solid #000;
             padding: 10px;
-            border: 1px solid #eee;
-            border-radius: 4px;
         }
 
-        .radio-group label, .checkbox-group label {
-            display: inline-block;
-            margin-right: 15px;
-            font-weight: normal;
-        }
-        
         button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
+            margin-top: 15px;
+            padding: 8px 12px;
             cursor: pointer;
-            margin-top: 20px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
         }
 
         #mensagem-feedback {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            font-weight: bold;
+            padding: 10px;
+            border: 1px solid #000;
             display: none;
-        }
-
-        .sucesso {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .erro {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -114,7 +74,7 @@
         <input type="text" id="nomePai" name="nomePai">
 
         <label>Telefone:</label>
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 5px;">
             <input type="text" id="ddd" name="ddd" placeholder="DDD" style="width: 70px;">
             <input type="text" id="tel" name="tel" placeholder="Tel" style="flex-grow: 1;">
             <input type="text" id="ramal" name="ramal" placeholder="Ramal" style="width: 80px;" disabled>
@@ -154,19 +114,18 @@
         
     </form>
     
-    <div id="mensagem-feedback" style="display: none;"></div>
+    <div id="mensagem-feedback"></div>
 </div>
 
 <script>
     const form = document.getElementById('form-matricula');
     const feedback = document.getElementById('mensagem-feedback');
 
-    // Lista COMPLETA de DDDs válidos no Brasil
     const dddsValidos = [
-        11, 12, 13, 14, 15, 16, 17, 18, 19, 21, 22, 24, 27, 28, 31, 32, 33, 34, 35, 37, 38, 
-        41, 42, 43, 44, 45, 46, 47, 48, 49, 51, 53, 54, 55, 61, 62, 63, 64, 65, 66, 67, 68, 
-        69, 71, 73, 74, 75, 77, 79, 81, 82, 83, 84, 85, 86, 87, 88, 89, 91, 92, 93, 94, 95, 
-        96, 97, 98, 99
+        11,12,13,14,15,16,17,18,19,21,22,24,27,28,31,32,33,34,35,37,38,
+        41,42,43,44,45,46,47,48,49,51,53,54,55,61,62,63,64,65,66,67,68,
+        69,71,73,74,75,77,79,81,82,83,84,85,86,87,88,89,91,92,93,94,95,
+        96,97,98,99
     ];
 
     form.addEventListener('submit', function(event) {
@@ -174,51 +133,47 @@
         feedback.style.display = 'none';
         let erros = [];
 
-        
-        const camposObrigatorios = ['nome', 'nascimento', 'nomeMae', 'nomePai', 'ddd', 'tel', 'email', 'serie'];
+        const camposObrigatorios = ['nome','nascimento','nomeMae','nomePai','ddd','tel','email','serie'];
         
         camposObrigatorios.forEach(id => {
             const campo = document.getElementById(id);
             if (campo.value.trim() === '') {
-                erros.push(`O campo **${campo.name.toUpperCase()}** é obrigatório.`);
+                erros.push(`O campo ${campo.name.toUpperCase()} é obrigatório.`);
             }
         });
 
-        
         const nascimentoInput = document.getElementById('nascimento').value.trim();
         if (nascimentoInput.length !== 10 || nascimentoInput.charAt(2) !== '/' || nascimentoInput.charAt(5) !== '/') {
-            erros.push('Data de Nascimento inválida. Use o formato **DD/MM/AAAA**.');
+            erros.push('Data de Nascimento inválida. Use DD/MM/AAAA.');
         }
-        
         
         const emailInput = document.getElementById('email').value.trim();
         if (emailInput.indexOf('@') === -1) {
-            erros.push('E-Mail precisa ter o caractere **@**.');
+            erros.push('E-Mail precisa ter @.');
         }
 
         const dddInput = parseInt(document.getElementById('ddd').value.trim());
         if (document.getElementById('ddd').value.trim() !== '' && !dddsValidos.includes(dddInput)) {
-             erros.push('DDD inválido. Por favor, use um DDD válido do Brasil.');
+             erros.push('DDD inválido.');
         }
 
         const turnoSelecionado = form.querySelector('input[name="turno"]:checked');
         if (!turnoSelecionado) {
-            erros.push('Selecione o **Turno** (Manhã ou Tarde).');
+            erros.push('Selecione o Turno.');
         }
 
-    
         const checkBoxes = form.querySelectorAll('input[name="extracurricular"]:checked');
         if (checkBoxes.length > 3) {
-            erros.push(`Selecione **no máximo 3** atividades Extracurriculares. Você selecionou ${checkBoxes.length}.`);
+            erros.push(`Selecione no máximo 3 atividades. Você marcou ${checkBoxes.length}.`);
         }
 
         if (erros.length > 0) {
             feedback.className = 'erro';
-            feedback.innerHTML = `🚨 **Ocorreu um Erro no Formulário!**<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
+            feedback.innerHTML = `Erro no Formulário:<ul>${erros.map(e => `<li>${e}</li>`).join('')}</ul>`;
             feedback.style.display = 'block';
         } else {
             feedback.className = 'sucesso';
-            feedback.innerHTML = '✅ **Sucesso!** Cadastro realizado com sucesso!';
+            feedback.innerHTML = 'Cadastro realizado com sucesso!';
             feedback.style.display = 'block';
             form.reset(); 
         }
