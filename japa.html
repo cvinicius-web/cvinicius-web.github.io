@@ -1,0 +1,656 @@
+
+<!doctype html>
+<html lang="pt-br">
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ 
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+ <title>Akari Sushi - Restaurante Japonês</title>
+
+ <style>
+ 
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap');
+
+ 
+  :root{
+    --akari-red: #b30000;
+    --akari-red-dark: #8c0000;
+    --akari-beige: #f4e9d8;
+    --akari-text: #2a2a2a;
+  }
+
+  html,body {
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--akari-beige);
+    color: var(--akari-text);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+
+ 
+  .navbar {
+    background-color: var(--akari-red) !important;
+  }
+  .navbar-brand, .nav-link {
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: #fff !important;
+  }
+  .nav-link:hover {
+    color: #ffe2cc !important;
+  }
+
+
+  h1, h2 {
+    text-align: center;
+    color: var(--akari-red);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  h3 {
+    color: var(--akari-red);
+    font-weight: 600;
+  }
+
+  
+ 
+
+  #cardapio .card-img-top.cardapio-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  
+  #galeria .card-img-top.gallery-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+
+  
+  #cardapio .card, #galeria .card {
+    overflow: hidden;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  }
+
+  
+
+ 
+  table thead {
+    background-color: var(--akari-red) !important;
+    color: #fff;
+  }
+  .table-bordered td, .table-bordered th {
+    background-color: #fff;
+  }
+
+  /* Botões */
+  .btn-primary {
+    background-color: var(--akari-red);
+    border: none;
+    font-weight: 600;
+  }
+  .btn-primary:hover {
+    background-color: var(--akari-red-dark);
+  }
+
+ 
+  /* As tabs do menu */
+  .nav-tabs .nav-link {
+    color: #000 !important;
+    font-weight: 600;
+  }
+  .nav-tabs .nav-link.active {
+    color: #000 !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none;
+  }
+
+ 
+
+  
+  @media (max-width: 576px) {
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.25rem; }
+    .carousel-img { max-height: none; aspect-ratio: 1 / 1; }
+    #cardapio .card-img-top.cardapio-img { height: 220px; }
+  }
+
+ </style>
+</head>
+<body>
+
+ <!-- NAVBAR BOOTSTRAP -->
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+   <div class="container">
+     <a class="navbar-brand" href="#">Akari Sushi</a>
+
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+
+     <div class="collapse navbar-collapse" id="menuNavbar">
+       <ul class="navbar-nav ms-auto">
+         <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+         <li class="nav-item"><a class="nav-link" href="#cardapio">Cardápio</a></li>
+         <li class="nav-item"><a class="nav-link" href="#sobre">Sobre Nós</a></li>
+         <li class="nav-item"><a class="nav-link" href="#reservas">Reservas</a></li>
+         <li class="nav-item"><a class="nav-link" href="#galeria">Galeria</a></li>
+         <li class="nav-item"><a class="nav-link" href="#contato">Fale Conosco</a></li>
+         <li class="nav-item"><a class="nav-link" href="#pedidos">Pedidos Online</a></li>
+         <li class="nav-item"><a class="nav-link" href="#promocoes">Promoções</a></li>
+       </ul>
+     </div>
+   </div>
+ </nav>
+
+ <!-- INÍCIO -->
+ <section id="inicio" class="bg-light py-5">
+   <div class="container">
+     <h1 class="mb-3">Akari Sushi</h1>
+     <p>Bem-vindo ao Akari Sushi — tradição e criatividade na culinária japonesa.</p>
+
+     <!-- CAROUSEL BOOTSTRAP-->
+     <div id="carouselExampleFade" class="carousel slide carousel-fade mt-4" data-bs-ride="carousel">
+       <div class="carousel-inner">
+
+         <div class="carousel-item active">
+           <img
+             src="interior1.jpg"
+             class="d-block w-100 carousel-img"
+             alt="Foto do interior do restaurante"
+             title="Foto do interior">
+         </div>
+
+         <div class="carousel-item">
+           <img
+             src="exterior1.webp"
+             class="d-block w-100 carousel-img"
+             alt="Foto da fachada/exterior"
+             title="Foto da fachada">
+         </div>
+
+         <div class="carousel-item">
+           <img
+             src="prato.webp"
+             class="d-block w-100 carousel-img"
+             alt="Foto do prato destaque"
+             title="Foto do prato destaque">
+         </div>
+
+       </div>
+
+       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="visually-hidden">Previous</span>
+       </button>
+
+       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="visually-hidden">Next</span>
+       </button>
+     </div>
+
+     <!-- Horários -->
+      <!--TABELA BOOTSTRAP-->
+     <h3 class="mt-4">Horários de Funcionamento</h3>
+     <div class="table-responsive">
+       <table class="table table-bordered w-auto">
+         <thead class="table-dark">
+           <tr><th>Dia</th><th>Abertura</th><th>Fechamento</th><th>Observação</th></tr>
+         </thead>
+         <tbody>
+           <tr><td>Segunda</td><td>11:30</td><td>22:00</td><td>Almoço e jantar</td></tr>
+           <tr><td>Terça</td><td>11:30</td><td>22:00</td><td>—</td></tr>
+           <tr><td>Quarta</td><td>11:30</td><td>22:00</td><td>—</td></tr>
+           <tr><td>Quinta</td><td>11:30</td><td>23:00</td><td>Noite com música</td></tr>
+           <tr><td>Sexta</td><td>11:30</td><td>00:00</td><td>Happy hour</td></tr>
+           <tr><td>Sábado</td><td>12:00</td><td>00:00</td><td>Reservas recomendadas</td></tr>
+           <tr><td>Domingo</td><td>12:00</td><td>18:00</td><td>Fechamento mais cedo</td></tr>
+         </tbody>
+       </table>
+     </div>
+
+   </div>
+ </section>
+
+ <!-- CARDÁPIO -->
+ <section id="cardapio" class="py-5">
+   <div class="container">
+     <h2 class="mb-3">Cardápio</h2>
+     <p>Nosso cardápio mistura clássicos japoneses com criações exclusivas da casa.</p>
+
+     <!-- NAV TABS BOOTSTRAP -->
+     <ul class="nav nav-tabs">
+       <li class="nav-item">
+         <a class="nav-link active" data-bs-toggle="tab" href="#entradas">Entradas</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" data-bs-toggle="tab" href="#principais">Pratos Principais</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" data-bs-toggle="tab" href="#sobremesas">Sobremesas</a>
+       </li>
+       <li class="nav-item">
+         <a class="nav-link" data-bs-toggle="tab" href="#bebidas">Bebidas</a>
+       </li>
+     </ul>
+
+     <div class="tab-content mt-3">
+       <!-- ENTRADAS -->
+       <div class="tab-pane fade show active" id="entradas">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="edamame.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Edamame">
+               <div class="card-body">
+                 <h5 class="card-title">Edamame</h5>
+                 <p class="card-text">Vagens de soja cozidas e temperadas com flor de sal.</p>
+                 <p class="card-text"><strong>R$ 18,00</strong></p>
+               </div>
+             </div>
+           </div>
+
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="gyoza.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Gyoza">
+               <div class="card-body">
+                 <h5 class="card-title">Gyoza (6 unidades)</h5>
+                 <p class="card-text">Pastelzinho japonês recheado, servido com molho ponzu.</p>
+                 <p class="card-text"><strong>R$ 26,00</strong></p>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <!-- PRINCIPAIS -->
+       <div class="tab-pane fade" id="principais">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="combinado.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Combinado Akari">
+               <div class="card-body">
+                 <h5 class="card-title">Combinado Akari</h5>
+                 <p class="card-text">Seleção de nigiris, sashimis e makis com ingredientes frescos.</p>
+                 <p class="card-text"><strong>R$ 78,00</strong></p>
+                 <span class="badge bg-success">Especial da Casa</span>
+               </div>
+             </div>
+           </div>
+
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="ramen.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Ramen Tonkotsu">
+               <div class="card-body">
+                 <h5 class="card-title">Ramen Tonkotsu</h5>
+                 <p class="card-text">Caldo cremoso de ossos, noodles caseiros, ovos marinados e chashu.</p>
+                 <p class="card-text"><strong>R$ 46,00</strong></p>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+
+       <!-- SOBREMESAS -->
+       <div class="tab-pane fade" id="sobremesas">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="mochi.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Mochi">
+               <div class="card-body">
+                 <h5 class="card-title">Mochi (3 unidades)</h5>
+                 <p class="card-text">Bolinhos de arroz recheados (chá verde, feijão, manga).</p>
+                 <p class="card-text"><strong>R$ 22,00</strong></p>
+               </div>
+             </div>
+           </div>
+
+       
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="dorayaki.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Dorayaki">
+               <div class="card-body">
+                 <h5 class="card-title">Dorayaki (2 unidades)</h5>
+                 <p class="card-text">Panquecas japonesas recheadas — opções: anko (feijão doce) ou doce de leite.</p>
+                 <p class="card-text"><strong>R$ 20,00</strong></p>
+               </div>
+             </div>
+           </div>
+
+         </div>
+       </div>
+      
+       <!-- BEBIDAS -->
+       <div class="tab-pane fade" id="bebidas">
+         <div class="row">
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="sake.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Sakê">
+               <div class="card-body">
+                 <h5 class="card-title">Sakê (180ml)</h5>
+                 <p class="card-text">Seleção de sakês nacionais e importados.</p>
+                 <p class="card-text"><strong>R$ 28,00</strong></p>
+               </div>
+             </div>
+           </div>
+
+           <div class="col-md-6">
+             <div class="card mb-3">
+               <img
+                 src="matcha.webp"
+                 class="card-img-top cardapio-img"
+                 alt="Matcha Latte">
+               <div class="card-body">
+                 <h5 class="card-title">Matcha Latte (350ml)</h5>
+                 <p class="card-text">Bebida cremosa à base de chá verde matcha — quente ou gelada.</p>
+                 <p class="card-text"><strong>R$ 14,00</strong></p>
+               </div>
+             </div>
+           </div>
+
+         </div>
+       </div>
+       
+
+     </div>
+   </div>
+ </section>
+
+ <!-- SOBRE NÓS -->
+ <section id="sobre" class="bg-light py-5">
+   <div class="container">
+     <h2 class="mb-3">Sobre Nós</h2>
+
+     <h3 class="h5 mt-3">História do Restaurante</h3>
+     <p>
+       Akari Sushi foi fundado em 2017 por um grupo de amigos apaixonados pela cultura
+       e gastronomia japonesa. A ideia nasceu após uma viagem ao Japão, quando perceberam
+       que faltava na cidade um espaço que unisse técnica japonesa, ingredientes locais e
+       um atendimento acolhedor.
+     </p>
+     <p>
+       Desde a abertura, o Akari prioriza fornecedores locais e pesca responsável: peixes
+       e frutos do mar são adquiridos em lotes pequenos e inspecionados diariamente para
+       garantir frescor. A casa também trabalha com produtores regionais para vegetais e
+       ervas, sempre que possível, reduzindo o tempo entre a colheita e a cozinha.
+     </p>
+     <p>
+       Nossa missão é apresentar a culinária japonesa com respeito às tradições — arroz
+       no ponto, cortes precisos, equilíbrio de umami — e ao mesmo tempo explorar pequenas
+       inovações que valorizem ingredientes brasileiros quando combinados de maneira elegante.
+     </p>
+
+     <h3 class="h5 mt-3">Perfil do Chef</h3>
+     <div class="row">
+       <div class="col-md-4">
+         <img
+           src="chefe.webp"
+           class="img-fluid rounded mb-2"
+           alt="Chef Haruto Tanaka">
+       </div>
+       <div class="col-md-8">
+         <p>
+           Chef <strong>Haruto Tanaka</strong> formou-se em gastronomia no Japão e completou
+           estágios em restaurantes tradicionais de Tóquio e Osaka. Pela sua carreira,
+           passou também por cozinhas na França, onde aprofundou técnicas de cocção e
+           apresentação, e trabalhou com chefs renomados no Brasil para adaptar ingredientes
+           locais à técnica japonesa.
+         </p>
+         <p>
+           Sua especialidade é o preparo de nigiri (atenção especial ao arroz e à fatia do peixe),
+           além de sashimis e caldos claros. Haruto é conhecido pela paciência no corte, pelo uso
+           de temperos sutis e pela busca do equilíbrio entre textura e sabor. Entre seus pratos
+           assinatura estão o "Nigiri de Atum com Ponzu cítrico" e o "Combinado Akari com toques brasileiros".
+         </p>
+       </div>
+     </div>
+
+     <h3 class="h5 mt-3">Prêmios e Reconhecimentos</h3>
+     <ul>
+       <li>Melhor Sushi da Cidade — Festival Gastronômico 2024 (fictício)</li>
+       <li>Prêmio Excelência Culinária — Guia Gastronômico Regional 2023</li>
+       <li>Reconhecimento Sustentável — Selo Pesca Responsável 2024</li>
+       <li>Top 50 Restaurantes da Região — Revista Sabores 2022</li>
+       <li>Prêmio Atendimento & Hospitalidade — Prêmio Local 2023</li>
+     </ul>
+   </div>
+ </section>
+
+ <!-- RESERVAS -->
+  <!-- FORM BOOTSTRAP-->
+ <section id="reservas" class="py-5">
+   <div class="container">
+     <h2 class="mb-3">Reservas</h2>
+     <form class="row g-3" id="formReserva" action="#" method="post" novalidate>
+       <div class="col-md-3">
+         <label for="dataReserva" class="form-label">Data</label>
+         <input type="date" class="form-control" id="dataReserva" name="dataReserva" required>
+       </div>
+       <div class="col-md-2">
+         <label for="horaReserva" class="form-label">Horário</label>
+         <input type="time" class="form-control" id="horaReserva" name="horaReserva" required>
+       </div>
+       <div class="col-md-2">
+         <label for="pessoasReserva" class="form-label">Nº de Pessoas</label>
+         <input type="number" class="form-control" id="pessoasReserva" name="pessoasReserva" min="1" max="20" value="2" required>
+       </div>
+       <div class="col-md-3">
+         <label for="nomeReserva" class="form-label">Nome</label>
+         <input type="text" class="form-control" id="nomeReserva" name="nomeReserva" placeholder="Seu nome" required>
+       </div>
+       <div class="col-md-2">
+         <label for="telefoneReserva" class="form-label">Telefone</label>
+         <input type="tel" class="form-control" id="telefoneReserva" name="telefoneReserva" placeholder="(00) 9 0000-0000" required>
+       </div>
+       <div class="col-12">
+         <label for="emailReserva" class="form-label">E-mail</label>
+         <input type="email" class="form-control" id="emailReserva" name="emailReserva" placeholder="seu@email.com">
+       </div>
+       <div class="col-12">
+         <button type="submit" class="btn btn-primary">Enviar Reserva</button>
+       </div>
+     </form>
+
+     <h3 class="h5 mt-4">Política de Reservas</h3>
+     <div class="accordion" id="politicaReserva">
+       <div class="accordion-item">
+         <h2 class="accordion-header" id="headingOne">
+           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+             Cancelamento e confirmação
+           </button>
+         </h2>
+         <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#politicaReserva">
+           <div class="accordion-body">
+             Favor confirmar 24 horas antes. Cancelamentos devem ser comunicados com no mínimo 12 horas de antecedência.
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+
+ <!-- GALERIA -->
+ <section id="galeria" class="bg-light py-5">
+   <div class="container">
+     <h2 class="mb-3">Galeria</h2>
+
+     <div class="row">
+       <div class="col-sm-6 col-md-4 mb-3">
+         <div class="card">
+           <img
+             src="OIP.webp"
+             class="card-img-top gallery-img"
+             alt="Galeria prato 1">
+           <div class="card-body"><p class="card-text">Combinado Akari</p></div>
+         </div>
+       </div>
+       <div class="col-sm-6 col-md-4 mb-3">
+         <div class="card">
+           <img
+             src="interior2.jpg"
+             class="card-img-top gallery-img"
+             alt="Galeria interior">
+           <div class="card-body"><p class="card-text">Ambiente aconchegante</p></div>
+         </div>
+       </div>
+       <div class="col-sm-6 col-md-4 mb-3">
+         <div class="card">
+           <img
+             src="evento.webp"
+             class="card-img-top gallery-img"
+             alt="Galeria evento">
+           <div class="card-body"><p class="card-text">Evento temático</p></div>
+         </div>
+       </div>
+     </div>
+
+     <h3 class="h5 mt-3">Avaliações de Clientes</h3>
+     <div class="row">
+       <div class="col-md-4">
+         <div class="card p-3 mb-3">
+           <p class="mb-1"><strong>Mariana S.</strong></p>
+           <p class="mb-1">★★★★★</p>
+           <p class="mb-0">"Melhor sushi da cidade! Atendimento impecável."</p>
+         </div>
+       </div>
+
+       <div class="col-md-4">
+         <div class="card p-3 mb-3">
+           <p class="mb-1"><strong>Júlia S.</strong></p>
+           <p class="mb-1">★★★★★</p>
+           <p class="mb-0">"Cada mordida mostra cuidado extremo — recomendo o combinado."</p>
+         </div>
+       </div>
+
+       <div class="col-md-4">
+         <div class="card p-3 mb-3">
+           <p class="mb-1"><strong>Marco A.</strong></p>
+           <p class="mb-1">★★★★★</p>
+           <p class="mb-0">"Ambiente ótimo para encontros e sabores autênticos."</p>
+         </div>
+       </div>
+
+       <div class="col-md-4">
+         <div class="card p-3 mb-3">
+           <p class="mb-1"><strong>Lícia M.</strong></p>
+           <p class="mb-1">★★★★★</p>
+           <p class="mb-0">"O ramen é sensacional — caldo no ponto e temperos equilibrados."</p>
+         </div>
+       </div>
+
+       <div class="col-md-4">
+         <div class="card p-3 mb-3">
+           <p class="mb-1"><strong>Roberto T.</strong></p>
+           <p class="mb-1">★★★★★</p>
+           <p class="mb-0">"Perfeito para ocasiões especiais. Experiência completa."</p>
+         </div>
+       </div>
+
+     </div>
+
+   </div>
+ </section>
+
+ <!-- FALE CONOSCO  -->
+ <section id="contato" class="py-5">
+   <div class="container">
+     <h2 class="mb-3">Fale Conosco</h2>
+     <div class="row">
+       <div class="col-md-6">
+         <p><strong>Endereço:</strong> Rua Exemplo, 123 — Centro, Maceió</p>
+         <p><strong>Telefone:</strong> (82) 9 9999-9999</p>
+         <p><strong>E-mail:</strong> contato@akarisushi.com.br</p>
+         <p>
+           <a href="#" class="me-2">Instagram</a>
+           <a href="#" class="me-2">Facebook</a>
+           <a href="#">TripAdvisor</a>
+         </p>
+       </div>
+
+       <div class="col-md-6">
+         <div class="ratio ratio-16x9">
+           <iframe src="https://www.google.com/maps/embed?pb=" allowfullscreen loading="lazy"></iframe>
+         </div>
+       </div>
+
+     <h3 class="h5 mt-3">Formulário de Contato</h3>
+     <!-- FORM BOOTSTRAP-->
+     <form class="row g-3" id="formContato" action="#" method="post">
+       <div class="col-md-6"><label for="nomeContato" class="form-label">Nome</label><input type="text" class="form-control" id="nomeContato" name="nomeContato"></div>
+       <div class="col-md-6"><label for="emailContato" class="form-label">E-mail</label><input type="email" class="form-control" id="emailContato" name="emailContato"></div>
+       <div class="col-12"><label for="assuntoContato" class="form-label">Assunto</label><input type="text" class="form-control" id="assuntoContato" name="assuntoContato"></div>
+       <div class="col-12"><label for="mensagemContato" class="form-label">Mensagem</label><textarea class="form-control" id="mensagemContato" name="mensagemContato" rows="4"></textarea></div>
+       <div class="col-12"><button type="submit" class="btn btn-primary">Enviar Mensagem</button></div>
+     </form>
+
+   </div>
+ </section>
+
+ <!-- PEDIDOS -->
+ <section id="pedidos" class="bg-light py-5">
+   <div class="container">
+     <h2 class="mb-3">Pedidos Online e Entrega</h2>
+     <p>Retirada e entrega via WhatsApp/telefone.</p>
+     <h5>Áreas de Entrega</h5>
+     <ul class="list-group mb-3 w-50">
+       <li class="list-group-item">Centro — 30–45 min</li>
+       <li class="list-group-item">Ponta Verde — 35–50 min</li>
+     </ul>
+   </div>
+ </section>
+
+ <!-- PROMOÇÕES -->
+ <section id="promocoes" class="py-5">
+   <div class="container">
+     <h2 class="mb-3">Promoções Especiais</h2>
+     <!-- ALERT BOOTSTRAP-->
+     <div class="alert alert-success" role="alert">Terça da Família — 20% de desconto em combinados familiares.</div>
+     <h3 class="h5 mt-3">Avaliações Online</h3>
+     <p><a href="#" class="me-2">Google Avaliações</a><a href="#" class="me-2">TripAdvisor</a></p>
+   </div>
+ </section>
+
+ <!-- FOOTER -->
+ <footer class="bg-dark text-white text-center py-3">
+   <small>© 2025 Akari Sushi - Todos os direitos reservados.</small>
+ </footer>
+
+ <!-- BOOTSTRAP JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
